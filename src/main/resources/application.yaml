@@ -1,3 +1,29 @@
 spring:
   application:
     name: rtc
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/${MYSQL_DATABASE:rtc_mysql}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:rtc_user}
+    password: ${MYSQL_PASSWORD:rtc_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      username: ${REDIS_USERNAME:rtc_user}
+      password: ${REDIS_PASSWORD:rtc_password}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+jwt:
+  secret: ${JWT_SECRET:LhzJEC30kHTtYsnPShNUnsioBcGZlucEwbDEvpDK6iP}
+  access-expiration: ${JWT_ACCESS_EXPIRATION:3600000}
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000}
