@@ -17,8 +17,11 @@ class UserRepositoryTest {
     void saveAndFindUser() {
         // given
         User user = User.builder()
-                .username("testuser")
+                .userId("testuser")
                 .password("password")
+                .name("Test User")
+                .department("IT")
+                .position("Developer")
                 .email("test@example.com")
                 .build();
 
@@ -26,9 +29,10 @@ class UserRepositoryTest {
         userRepository.save(user);
 
         // then
-        User foundUser = userRepository.findByUsername("testuser").orElse(null);
+        User foundUser = userRepository.findByUserId("testuser").orElse(null);
         assertThat(foundUser).isNotNull();
-        assertThat(foundUser.getUsername()).isEqualTo("testuser");
+        assertThat(foundUser.getUserId()).isEqualTo("testuser");
+        assertThat(foundUser.getName()).isEqualTo("Test User");
         assertThat(foundUser.getEmail()).isEqualTo("test@example.com");
     }
 }

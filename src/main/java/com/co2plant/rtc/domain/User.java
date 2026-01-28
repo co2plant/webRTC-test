@@ -5,10 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -21,23 +18,32 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+    @Column(nullable = false, unique = true, name = "user_id")
+    private String userId;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column
+    private String department;
+
+    @Column
+    private String position;
+
+    // Optional email, can keep it or remove if strictly following diagram. Kept for utility.
+    @Column
     private String email;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-
     @Builder
-    public User(String username, String password, String email) {
-        this.username = username;
+    public User(String userId, String password, String name, String department, String position, String email) {
+        this.userId = userId;
         this.password = password;
+        this.name = name;
+        this.department = department;
+        this.position = position;
         this.email = email;
     }
 }

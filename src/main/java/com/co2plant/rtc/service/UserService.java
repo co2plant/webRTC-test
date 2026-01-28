@@ -14,19 +14,22 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long register(String username, String password, String email) {
+    public Long register(String userId, String password, String name, String department, String position, String email) {
         // TODO: Password encoding needed
         User user = User.builder()
-                .username(username)
+                .userId(userId)
                 .password(password)
+                .name(name)
+                .department(department)
+                .position(position)
                 .email(email)
                 .build();
         
         return userRepository.save(user).getId();
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+    public User findByUserId(String userId) {
+        return userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + userId));
     }
 }
