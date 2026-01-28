@@ -1,0 +1,34 @@
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0.23
+    container_name: rtc_mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-rtc_mysql}
+      MYSQL_USER: ${MYSQL_USER:-rtc_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-rtc_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rtc_password}
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db-data:/var/lib/mysql
+    networks:
+      - rtc-net
+
+  # Redis Cache
+  redis:
+    image: redis:alpine
+    container_name: rtc_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - rtc-net
+
+networks:
+  rtc-net:
+    driver: bridge
