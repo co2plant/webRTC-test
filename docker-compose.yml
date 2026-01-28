@@ -1,8 +1,8 @@
 services:
-  # MySQL Database
   db:
     image: mysql:8.0.23
     container_name: rtc_mysql
+    restart: always
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
@@ -20,14 +20,41 @@ services:
     networks:
       - rtc-net
 
-  # Redis Cache
   redis:
     image: redis:alpine
     container_name: rtc_redis
+    restart: always
+    command: redis-server --requirepass ${MYSQL_PASSWORD:-rtc_password} # Using rtc_password as default or logic from env
     ports:
       - "6379:6379"
+      - "8001:8001"
     networks:
       - rtc-net
+
+  kms:
+    image: kurento/kurento-media-server:6.18.0
+    container_name: rtc_kms
+    restart: always
+    network_mode: host
+    environment:
+      - KMS_MIN_PORT=50000
+      - KMS_MAX_PORT=50050
+
+  coturn:
+    image: coturn/coturn
+    container_name: rtc_coturn
+    restart: always
+    network_mode: host
+    command:
+      - -n
+      - --log-file=stdout
+      - --min-port=49152
+      - --max-port=49200
+      - --realm=myrealm
+      - --user=myuser:mypassword
+      - --lt-cred-mech
+      - --fingerprint
+      - --external-ip=127.0.0.1
 
 networks:
   rtc-net:
