@@ -3,7 +3,10 @@ package com.co2plant.rtc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 @SpringBootApplication
+@EnableJpaAuditing
 public class RtcApplication {
 
 	public static void main(String[] args) {
