@@ -109,7 +109,7 @@ function onExistingParticipants(msg) {
 							iceServers: [
 								{ urls: "stun:stun.l.google.com:19302" },
 								{
-									urls: "turn:70.12.246.200:3478",
+									urls: "turn:" + location.hostname + ":3478",
 									username: "myuser",
 									credential: "mypassword"
 								}
@@ -163,7 +163,7 @@ function receiveVideo(sender) {
 			iceServers: [
 				{ urls: "stun:stun.l.google.com:19302" },
 				{
-					urls: "turn:70.12.246.200:3478",
+					urls: "turn:" + location.hostname + ":3478",
 					username: "myuser",
 					credential: "mypassword"
 				}
