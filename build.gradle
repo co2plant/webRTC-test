@@ -43,6 +43,7 @@ dependencies {
 
 	implementation 'org.kurento:kurento-client:6.18.0'
 	implementation 'org.kurento:kurento-utils-js:6.18.0'
+	implementation 'com.google.code.gson:gson:2.8.9'
 
 	implementation 'org.springframework.security:spring-security-crypto'
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'

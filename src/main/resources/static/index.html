@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WebRTC Screen Share Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+            border: 2px solid #333;
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center">WebRTC Screen Share (Loopback)</h1>
+        <div class="row mt-4">
+            <div class="col-md-12 text-center mb-3">
+                <button id="startBtn" class="btn btn-primary">Start Screen Share</button>
+                <button id="stopBtn" class="btn btn-danger" disabled>Stop</button>
+            </div>
+            <div class="col-md-6">
+                <h3>Local Stream (My Screen)</h3>
+                <video id="videoInput" autoplay playsinline muted></video>
+            </div>
+            <div class="col-md-6">
+                <h3>Remote Stream (From Kurento)</h3>
+                <video id="videoOutput" autoplay playsinline></video>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div id="console" class="border p-2" style="height: 150px; overflow-y: scroll; background: #f0f0f0;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/webjars/webrtc-adapter/release/adapter.js"></script>
+    <script src="/webjars/jquery/dist/jquery.min.js"></script>
+    <script src="/js/kurento-utils.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -35,10 +35,14 @@ services:
     image: kurento/kurento-media-server:6.18.0
     container_name: rtc_kms
     restart: always
-    network_mode: host
+    ports:
+      - "8888:8888"
+      - "50000-50050:50000-50050/udp"
     environment:
       - KMS_MIN_PORT=50000
       - KMS_MAX_PORT=50050
+    networks:
+      - rtc-net
 
   coturn:
     image: coturn/coturn
