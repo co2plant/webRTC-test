@@ -100,12 +100,21 @@ function onExistingParticipants(msg) {
 			navigator.mediaDevices.getDisplayMedia({ video: true })
 				.then(stream => {
 					localVideo.srcObject = stream;
-
 					var options = {
 						localVideo: localVideo,
 						onicecandidate: participant.onIceCandidate.bind(participant),
 						videoStream: stream,
-						mediaConstraints: constraints
+						mediaConstraints: constraints,
+						configuration: {
+							iceServers: [
+								{ urls: "stun:stun.l.google.com:19302" },
+								{
+									urls: "turn:70.12.246.200:3478",
+									username: "myuser",
+									credential: "mypassword"
+								}
+							]
+						}
 					};
 
 					participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(options,
@@ -149,7 +158,17 @@ function receiveVideo(sender) {
 
 	var options = {
 		remoteVideo: participant.getVideoElement(),
-		onicecandidate: participant.onIceCandidate.bind(participant)
+		onicecandidate: participant.onIceCandidate.bind(participant),
+		configuration: {
+			iceServers: [
+				{ urls: "stun:stun.l.google.com:19302" },
+				{
+					urls: "turn:70.12.246.200:3478",
+					username: "myuser",
+					credential: "mypassword"
+				}
+			]
+		}
 	}
 
 	participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options,

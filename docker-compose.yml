@@ -48,7 +48,12 @@ services:
     image: coturn/coturn
     container_name: rtc_coturn
     restart: always
-    network_mode: host
+    ports:
+      - "3478:3478"
+      - "3478:3478/udp"
+      - "49152-49200:49152-49200/udp"
+    networks:
+      - rtc-net
     command:
       - -n
       - --log-file=stdout
@@ -58,7 +63,7 @@ services:
       - --user=myuser:mypassword
       - --lt-cred-mech
       - --fingerprint
-      - --external-ip=127.0.0.1
+      - --external-ip=70.12.246.200
 
 networks:
   rtc-net:
