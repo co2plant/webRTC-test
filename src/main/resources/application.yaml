@@ -27,3 +27,7 @@ jwt:
   secret: ${JWT_SECRET:LhzJEC30kHTtYsnPShNUnsioBcGZlucEwbDEvpDK6iP}
   access-expiration: ${JWT_ACCESS_EXPIRATION:3600000}
   refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000}
+
+kurento:
+  client:
+    url: ${KURENTO_URL:ws://localhost:8888/kurento}
