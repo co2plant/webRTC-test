@@ -41,6 +41,7 @@ services:
     environment:
       - KMS_MIN_PORT=50000
       - KMS_MAX_PORT=50050
+      - KMS_EXTERNAL_ADDRESS=
     networks:
       - rtc-net
 
@@ -63,7 +64,7 @@ services:
       - --user=myuser:mypassword
       - --lt-cred-mech
       - --fingerprint
-      - --external-ip=70.12.246.200
+      - --external-ip=
 
 networks:
   rtc-net:
